@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Extrae el nivel jerárquico del índice ordenado tipo 01., 01.01., etc.
+ */
+function _custom_jerarquia_taxonomia_get_level($orden_jerarquico) {
+  $parts = explode(' ', $orden_jerarquico, 2);
+  if (isset($parts[0])) {
+    $numerical_prefix = $parts[0];
+    // Divide por puntos y cuenta cuántos segmentos hay
+    $segments = explode('.', $numerical_prefix);
+    return count(array_filter($segments)); // filtra vacíos
+  }
+
+  return 0;
+}
+
+/**
+ * field_nivel1.
+ */
+function computed_field_field_nivel1_compute($entity_type_manager, $entity, $fields, $delta) {
+  if ($entity->getEntityTypeId() === 'taxonomy_term' && $entity->bundle() === 'naturaleza') {
+    $orden = $entity->get('field_orden_jerarquico')->value;
+    if (_custom_jerarquia_taxonomia_get_level($orden) === 1) {
+      return $entity->label();
+    }
+  }
+  return '';
+}
+
+/**
+ * field_nivel2.
+ */
+function computed_field_field_nivel2_compute($entity_type_manager, $entity, $fields, $delta) {
+  if ($entity->getEntityTypeId() === 'taxonomy_term' && $entity->bundle() === 'naturaleza') {
+    $orden = $entity->get('field_orden_jerarquico')->value;
+    if (_custom_jerarquia_taxonomia_get_level($orden) === 2) {
+      return $entity->label();
+    }
+  }
+  return '';
+}
+
+/**
+ * field_nivel3.
+ */
+function computed_field_field_nivel3_compute($entity_type_manager, $entity, $fields, $delta) {
+  if ($entity->getEntityTypeId() === 'taxonomy_term' && $entity->bundle() === 'naturaleza') {
+    $orden = $entity->get('field_orden_jerarquico')->value;
+    if (_custom_jerarquia_taxonomia_get_level($orden) === 3) {
+      return $entity->label();
+    }
+  }
+  return '';
+}
+
+/**
+ * field_nivel4.
+ */
+function computed_field_field_nivel4_compute($entity_type_manager, $entity, $fields, $delta) {
+  if ($entity->getEntityTypeId() === 'taxonomy_term' && $entity->bundle() === 'naturaleza') {
+    $orden = $entity->get('field_orden_jerarquico')->value;
+    if (_custom_jerarquia_taxonomia_get_level($orden) === 4) {
+      return $entity->label();
+    }
+  }
+  return '';
+}

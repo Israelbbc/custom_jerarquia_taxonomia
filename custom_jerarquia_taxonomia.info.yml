@@ -1,0 +1,8 @@
+name: 'Jerarquía Taxonomía'
+type: module
+description: 'Campo computado para jerarquía: abuelo, padre, hijo.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - computed_field
+
